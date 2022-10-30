@@ -8,7 +8,7 @@ function Navbar() {
     <nav className="navbar_container">
       <TiWeatherStormy color="#fdfdfd" size="40" style={{ margin: '10' }} />
       <NavLink
-        to={url('home.weathers')}
+        to={url('home')}
         className={({ isActive }) =>
           (isActive ? 'active ' : '') + 'navbar_item'
         }

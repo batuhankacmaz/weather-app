@@ -1,0 +1,55 @@
+$city-card-background-color: #f3a683;
+$city-card-border-color: #fdfdfd;
+$remove-button-color: #ff6b6b;
+$add-favorite-color: #5f27cd;
+
+@mixin border($b-width, $b-style, $b-color, $b-radius) {
+  border-width: $b-width;
+  border-style: $b-style;
+  border-color: $b-color;
+  border-radius: $b-radius;
+}
+
+.city_card_container {
+  display: flex;
+  margin: 1em auto;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $city-card-background-color;
+  @include border(2px, solid, $city-card-border-color, 10px);
+  .city_name {
+    color: $city-card-border-color;
+  }
+  .weathers {
+    display: flex;
+    .weather {
+      list-style: none;
+    }
+  }
+  .button_group {
+    display: flex;
+    flex-direction: column;
+    button {
+      background-color: $city-card-border-color;
+      padding: 0.7em;
+      margin: 0.2em;
+      width: 8vw;
+      font-size: medium;
+      border-radius: 10px;
+      border-style: none;
+      cursor: pointer;
+    }
+    .remove {
+      &:hover {
+        background-color: $remove-button-color;
+        color: $city-card-border-color;
+      }
+    }
+    .add_favorite {
+      &:hover {
+        background-color: $add-favorite-color;
+        color: $city-card-border-color;
+      }
+    }
+  }
+}

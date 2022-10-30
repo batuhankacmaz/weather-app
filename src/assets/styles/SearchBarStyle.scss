@@ -1,0 +1,21 @@
+$search-bar-color: #fdfdfd;
+
+.search_bar_container {
+  display: flex;
+  margin: auto;
+  margin-bottom: 2em;
+  align-items: center;
+  background-color: $search-bar-color;
+  width: 30%;
+  padding: 0.3em 0.5em;
+  border-radius: 10px;
+  .search_bar {
+    width: 95%;
+    height: 100%;
+    border-style: none;
+    font-size: larger;
+    &:focus {
+      outline-width: 0;
+    }
+  }
+}

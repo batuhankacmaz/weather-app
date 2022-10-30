@@ -1,0 +1,39 @@
+$card-container-color: #fdfdfd;
+$card-border-color: #000000;
+$card-header-color: #8395a7;
+
+@mixin border($b-width, $b-style, $b-color, $b-radius) {
+  border-width: $b-width;
+  border-style: $b-style;
+  border-color: $b-color;
+  border-radius: $b-radius;
+}
+
+.card_container {
+  display: flex;
+  padding: 0.5em;
+  margin: 0.5em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $card-container-color;
+  @include border(2px, solid, $card-border-color, 5%);
+  .card_header {
+    font-size: larger;
+    color: $card-header-color;
+    font-weight: bold;
+  }
+  .card_image {
+    height: 80px;
+    width: 80px;
+  }
+  .card_information {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    .min_temperature {
+      color: $card-header-color;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import HomeLayout from './pages/HomeLayout';
 import PageNotFound from './pages/404';
 
 export interface IRoute {
+  index?: boolean;
   path?: string;
   name: string;
   element: React.ReactNode;
@@ -17,7 +18,7 @@ const routes = [
     name: 'home',
     element: <HomeLayout />,
     children: [
-      { path: 'weathers', name: 'weathers', element: <Weathers /> },
+      { index: true, name: 'index', element: <Weathers /> },
       { path: 'favorites', name: 'favorites', element: <Favorites /> },
       { path: '*', name: 'notFound', element: <PageNotFound /> },
     ],

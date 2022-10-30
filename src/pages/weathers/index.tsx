@@ -1,9 +1,12 @@
 import React from 'react';
+import SearchBar from '../../components/SearchBar';
+import CityCard from '../../components/CityCard';
 
 function Weathers() {
   return (
     <>
-      <h1>Weathers</h1>
+      <SearchBar />
+      <CityCard />
     </>
   );
 }
