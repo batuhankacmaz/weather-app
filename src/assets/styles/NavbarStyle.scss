@@ -1,0 +1,29 @@
+$navbar-color: #f19066;
+$navbar-hover-color: #f3a683;
+$navbar-text-color: #fdfdfd;
+
+.navbar_container {
+  height: 4vh;
+  padding: 0.2em;
+  display: flex;
+  align-items: center;
+  background-color: $navbar-color;
+  .navbar_item {
+    display: inline-flex;
+    align-items: center;
+    width: 10vw;
+    height: 100%;
+    border-radius: 25%;
+    margin: 0 0.1em;
+
+    text-decoration: none;
+    &:hover {
+      background-color: $navbar-hover-color;
+    }
+    .navbar_item_text {
+      margin: auto;
+      font-size: larger;
+      color: $navbar-text-color;
+    }
+  }
+}
