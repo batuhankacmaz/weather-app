@@ -1,13 +1,15 @@
 import React from 'react';
 import WeatherCard from '../WeatherCard';
-import { BsSearch } from 'react-icons/bs';
+import { useWeather, WeatherContextType } from '../../context/global.state';
 import '../../assets/styles/CityCardStyle.scss';
 
 function CityCard() {
+  const { theme, setLightTheme, setDarkTheme } =
+    useWeather() as WeatherContextType;
   return (
     <div className="city_card_container">
       <div className="city_name">
-        <h2>Istanbul</h2>
+        <h2>{theme}</h2>
       </div>
       <ul className="weathers">
         <li className="weather">
@@ -33,8 +35,12 @@ function CityCard() {
         </li>
       </ul>
       <div className="button_group">
-        <button className="remove">Remove </button>
-        <button className="add_favorite">Add Favorite</button>
+        <button className="remove" onClick={setLightTheme}>
+          Remove{' '}
+        </button>
+        <button className="add_favorite" onClick={setDarkTheme}>
+          Add Favorite
+        </button>
       </div>
     </div>
   );
