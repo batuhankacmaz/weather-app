@@ -1,21 +1,27 @@
 import { createContext, useContext } from 'react';
 
+export interface ICityWeathersApp {
+  citiesWeathers: ICityWeathers[];
+}
+export interface ICityWeathers {
+  id: number;
+  cityName: string;
+  isFavorite: boolean;
+  weathers: IWeather[];
+}
+
 export interface IWeather {
-  isLoggedIn: boolean;
-  theme: string;
-  isModalOpen: boolean;
+  weatherForecast: string;
+  minTemperature: number;
+  maxTemperature: number;
 }
 
 export type WeatherContextType = {
-  isLoggedIn: boolean;
-  theme: string;
-  isModalOpen: boolean;
-  closeModal: () => void;
-  openModal: () => void;
-  setDarkTheme: () => void;
-  setLightTheme: () => void;
-  logout: () => void;
-  login: () => void;
+  add: (cityName: string, weathers: IWeather[]) => void;
+  remove: (id: number) => void;
+  addFavorite: (id: number) => void;
+  removeFavorite: (id: number) => void;
+  citiesWeathers: ICityWeathers[];
 };
 
 export const GlobalState = createContext<WeatherContextType | null>(null);

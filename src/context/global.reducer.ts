@@ -1,38 +1,42 @@
 import { globalActionTypes as actions, IActions } from './global.actions';
-import { IWeather } from './global.state';
+import { ICityWeathers, IWeather, ICityWeathersApp } from './global.state';
 
-export const globalReducer = (state: IWeather, action: IActions) => {
+export const globalReducer = (state: ICityWeathersApp, action: IActions) => {
   switch (action.type) {
-    case actions.LOGIN:
-      return {
-        ...state,
-        isLoggedIn: true,
-      };
-    case actions.LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false,
-      };
-    case actions.LIGHT_THEME:
-      return {
-        ...state,
-        theme: 'light',
-      };
-    case actions.DARK_THEME:
-      return {
-        ...state,
-        theme: 'dark',
-      };
-    case actions.OPEN_MODAL:
-      return {
-        ...state,
-        isModalOpen: true,
-      };
-    case actions.CLOSE_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-      };
+    case actions.ADD: {
+      state.citiesWeathers.push({
+        id: state.citiesWeathers.length,
+        cityName: action.cityName as string,
+        isFavorite: false,
+        weathers: action.weathers as IWeather[],
+      });
+      return { ...state };
+    }
+    case actions.REMOVE: {
+      state.citiesWeathers = state.citiesWeathers.filter(
+        (item) => item.id !== action.id
+      );
+      return { ...state };
+    }
+
+    case actions.ADD_FAVORITE: {
+      const selectedItem = state.citiesWeathers.find(
+        (item) => item.id === action.id
+      );
+      if (selectedItem) {
+        selectedItem.isFavorite = true;
+      }
+      return { ...state };
+    }
+    case actions.REMOVE_FAVORITE: {
+      const selectedItem = state.citiesWeathers.find(
+        (item) => item.id === action.id
+      );
+      if (selectedItem) {
+        selectedItem.isFavorite = false;
+      }
+      return { ...state };
+    }
     default:
       return state;
   }

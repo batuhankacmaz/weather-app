@@ -1,37 +1,35 @@
 import React, { useReducer } from 'react';
 import { globalReducer } from './global.reducer';
 import { globalActionTypes as actions } from './global.actions';
-import { GlobalState } from './global.state';
+import {
+  GlobalState,
+  ICityWeathersApp,
+  IWeather,
+  ICityWeathers,
+} from './global.state';
 
-const GLOBAL_STATE = {
-  isLoggedIn: false,
-  theme: 'light',
-  isModalOpen: false,
+const GLOBAL_STATE: ICityWeathersApp = {
+  citiesWeathers: [],
 };
 
 export const GlobalStateProvider: React.FunctionComponent<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, GLOBAL_STATE);
+
   const value = {
     ...state,
-    login: () => {
-      dispatch({ type: actions.LOGIN });
+    add: (cityName: string, weathers: IWeather[]) => {
+      dispatch({ type: actions.ADD, cityName, weathers });
     },
-    logout: () => {
-      dispatch({ type: actions.LOGOUT });
+    remove: (id: number) => {
+      dispatch({ type: actions.REMOVE, id });
     },
-    setLightTheme: () => {
-      dispatch({ type: actions.LIGHT_THEME });
+    addFavorite: (id: number) => {
+      dispatch({ type: actions.ADD_FAVORITE, id });
     },
-    setDarkTheme: () => {
-      dispatch({ type: actions.DARK_THEME });
-    },
-    openModal: () => {
-      dispatch({ type: actions.OPEN_MODAL });
-    },
-    closeModal: () => {
-      dispatch({ type: actions.CLOSE_MODAL });
+    removeFavorite: (id: number) => {
+      dispatch({ type: actions.REMOVE_FAVORITE, id });
     },
   };
 
