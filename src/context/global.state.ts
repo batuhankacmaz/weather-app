@@ -14,6 +14,7 @@ export interface IWeather {
   weatherForecast: string;
   minTemperature: number;
   maxTemperature: number;
+  datetime: string;
 }
 
 export type WeatherContextType = {

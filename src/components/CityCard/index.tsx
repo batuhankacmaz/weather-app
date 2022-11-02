@@ -4,48 +4,68 @@ import { useWeather, WeatherContextType } from '../../context/global.state';
 import '../../assets/styles/CityCardStyle.scss';
 
 function CityCard() {
-  const { citiesWeathers, add } = useWeather() as WeatherContextType;
-  const handleAddCity = () => {
-    add('Istanbul', [
-      { weatherForecast: 'gunes', minTemperature: 20, maxTemperature: 21 },
-    ]);
+  const { citiesWeathers, remove, addFavorite, removeFavorite } =
+    useWeather() as WeatherContextType;
+
+  const handleRemove = (id: number) => {
+    remove(id);
   };
-  console.log(citiesWeathers);
+  const handleFavorite = (id: number) => {
+    addFavorite(id);
+  };
+  const handleRemoveFavorite = (id: number) => {
+    removeFavorite(id);
+  };
+
   return (
-    <div className="city_card_container">
-      <div className="city_name">
-        <h2>{citiesWeathers.length}</h2>
-      </div>
-      <ul className="weathers">
-        <li className="weather">
-          <WeatherCard />
-        </li>
-        <li className="weather">
-          <WeatherCard />
-        </li>
-        <li className="weather">
-          <WeatherCard />
-        </li>
-        <li className="weather">
-          <WeatherCard />
-        </li>
-        <li className="weather">
-          <WeatherCard />
-        </li>
-        <li className="weather">
-          <WeatherCard />
-        </li>
-        <li className="weather">
-          <WeatherCard />
-        </li>
-      </ul>
-      <div className="button_group">
-        <button className="remove">Remove </button>
-        <button className="add_favorite" onClick={handleAddCity}>
-          Add Favorite
-        </button>
-      </div>
-    </div>
+    <>
+      {citiesWeathers.length ? (
+        citiesWeathers.map((cityWeathers, index) => {
+          return (
+            <div className="city_card_container" key={index}>
+              <div className="city_name">
+                <h2>{cityWeathers.cityName}</h2>
+              </div>
+              <ul className="weathers">
+                {cityWeathers.weathers.map((weather, index) => (
+                  <li className="weather" key={index}>
+                    <WeatherCard weather={weather} />
+                  </li>
+                ))}
+              </ul>
+              <div className="button_group">
+                <button
+                  className="remove"
+                  onClick={() => handleRemove(cityWeathers.id)}
+                >
+                  Remove{' '}
+                </button>
+                {cityWeathers.isFavorite ? (
+                  <button
+                    className="add_favorite"
+                    onClick={() => handleRemoveFavorite(cityWeathers.id)}
+                  >
+                    Remove Favorite
+                  </button>
+                ) : (
+                  <button
+                    className="add_favorite"
+                    onClick={() => handleFavorite(cityWeathers.id)}
+                  >
+                    Add Favorite
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        /*   */
+        <div>
+          <h1 className="no_item">Eleman yok</h1>
+        </div>
+      )}
+    </>
   );
 }
 

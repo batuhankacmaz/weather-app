@@ -53,3 +53,9 @@ $add-favorite-color: #5f27cd;
     }
   }
 }
+
+.no_item {
+  color: $city-card-border-color;
+  margin: 3em;
+  text-align: center;
+}

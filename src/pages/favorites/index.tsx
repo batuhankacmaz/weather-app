@@ -1,9 +1,9 @@
 import React from 'react';
-
+import FavoriteCard from '../../components/FavoriteCard';
 function Favorites() {
   return (
     <>
-      <h1>Favorites</h1>
+      <FavoriteCard />
     </>
   );
 }
