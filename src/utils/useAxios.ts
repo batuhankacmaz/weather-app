@@ -10,7 +10,7 @@ export interface IFilteredData {
 
 export async function getWeathersData(cityName: string) {
   try {
-    const { data } = await axios.get<RootObject>(
+    const { data, status } = await axios.get<RootObject>(
       `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&country=TR&days=7&key=${process.env.REACT_APP_API_KEY}`,
       {
         headers: {
@@ -18,20 +18,22 @@ export async function getWeathersData(cityName: string) {
         },
       }
     );
-
-    const filteredWeathers = data.data.map((item) => {
-      return {
-        weatherForecast: item.weather.description,
-        minTemperature: item.min_temp,
-        maxTemperature: item.max_temp,
-        datetime: item.datetime,
+    console.log('status', status);
+    if (status === 200) {
+      const filteredWeathers = data.data.map((item) => {
+        return {
+          weatherForecast: item.weather.description,
+          minTemperature: item.min_temp,
+          maxTemperature: item.max_temp,
+          datetime: item.datetime,
+        };
+      });
+      const filteredData: IFilteredData = {
+        cityName: data.city_name,
+        weathers: filteredWeathers,
       };
-    });
-    const filteredData: IFilteredData = {
-      cityName: data.city_name,
-      weathers: filteredWeathers,
-    };
-    return filteredData;
+      return filteredData;
+    }
   } catch (err) {
     if (axios.isAxiosError(err)) {
       console.log('err message:', err.message);
